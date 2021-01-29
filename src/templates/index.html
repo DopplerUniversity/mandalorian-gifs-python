@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="author" content="Ryan Blunden" />
+    <meta name="description" content="Mandalorian Random GIF Generator" />
+    <title>Mandalorian Random GIF Generator</title>
+
+    <meta name="theme-color" content="#7952b3" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous"/>
+    <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}">
+  </head>
+  <body class="text-center text-white bg-dark">
+    <div class="cover-container p-3 mx-auto">
+      <header class="mt-1">
+        <img src="{{ url_for('static', filename='img/mandalorion-logo.png') }}" class="logo img-fluid" />
+        <h1 class="mt-0 text-uppercase h5"><span class="sr-only">Mandalorian</span>Random GIF Generator</h1>
+      </header>
+
+      <main class="">        
+        <video class="mt-5 img-fluid" muted autoplay loop>
+          <source src="{{ giphy_url }}" type="video/mp4">
+        </div>
+      </main>
+
+      <footer class="mt-3 text-white-50">
+        <p class="small mb-0">
+          Powered by <a href="https://giphy.com/search/mandalorian" class="text-white" target="_blank">GIPHY</a> and the <a href="https://doppler.com/" class="text-white" target="_blank">Doppler Universal Secrets Manager</a>
+        </p>
+        <p class="small mt-1">
+          Mandalorian logo by <a href="https://www.deviantart.com/kiofficialart/art/Star-Wars-Mandalorian-logo-title-Fanmade-795171000" class="text-white" target="_blank">KIOfficialArt</a>
+        </p>
+        <p class="mt-0">
+          <a href="https://github.com/DopplerHQ/mandalorion-gifs" class="text-white" target="_blank">
+            <img src="{{ url_for('static', filename='img/github-logo.png') }}">
+          </a>
+        </p>
+      </footer>
+    </div>
+  </body>
+</html>

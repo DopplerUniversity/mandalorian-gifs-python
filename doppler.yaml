@@ -1,0 +1,3 @@
+setup:
+    project: mandalorion-gifs
+    config: dev

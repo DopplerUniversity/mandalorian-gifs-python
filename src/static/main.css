@@ -1,0 +1,42 @@
+body {
+  text-shadow: 0 0.05rem 0.1rem rgba(0, 0, 0, 0.5);
+}
+
+h1 {
+  text-transform: uppercase;
+}
+
+.logo {
+  max-height: 150px;
+}
+
+video {
+  max-height: 400px;
+}
+.cover-container {
+  max-width: 60em;
+}
+
+footer {
+  width: 100%;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+@media (min-height: 768px) {
+  footer {
+    width: 100%;
+    position: absolute;
+    bottom: 10px;
+  }
+}
