@@ -22,7 +22,7 @@ doppler-dev:
 
 env-file-dev:
 	. ~/.virtualenvs/mandalorion-gifs/bin/activate && \
-	. sample.env && \
+	. ./sample.env && \
 	python3 src/app.py
 
 
