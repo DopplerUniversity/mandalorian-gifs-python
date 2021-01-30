@@ -1,9 +1,9 @@
 create-virtual-env:
 	mkdir -p ~/.virtualenvs && \
 	python3 -m venv ~/.virtualenvs/mandalorion-gifs && \
-	source ~/.virtualenvs/mandalorion-gifs/bin/activate && \
+	. ~/.virtualenvs/mandalorion-gifs/bin/activate && \
 	pip install --upgrade pip -r requirements.txt
-	@echo '[info]: Now run `source ~/.virtualenvs/mandalorion-gifs/bin/activate` to activate the virtual environment'
+	@echo '[info]: Now run `. ~/.virtualenvs/mandalorion-gifs/bin/activate` to activate the virtual environment'
 
 # USAGE: make create-doppler-project GIPHY_API_KEY=XXXX
 create-doppler-project:
@@ -18,11 +18,11 @@ create-doppler-project:
 	doppler secrets set	GIPHY_API_KEY="$(GIPHY_API_KEY)"
 
 doppler-dev:
-	source ~/.virtualenvs/mandalorion-gifs/bin/activate && doppler run -- python src/app.py
+	. ~/.virtualenvs/mandalorion-gifs/bin/activate && doppler run -- python src/app.py
 
 env-file-dev:
-	source ~/.virtualenvs/mandalorion-gifs/bin/activate && \
-	source sample.env && \
+	. ~/.virtualenvs/mandalorion-gifs/bin/activate && \
+	. sample.env && \
 	python3 src/app.py
 
 
