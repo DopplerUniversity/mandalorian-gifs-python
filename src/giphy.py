@@ -21,4 +21,4 @@ def get_random(api_key: str, tag: str, rating: str) -> str:
         print('[error]: Expected key not found in JSON response: {}. Serving random cached response.'.format(err))
 
     # Return cached response as a catch-all
-    return cached_responses[randint(0, len(cached_responses)-1)]['data']['images']['original']['mp4']
+    return cached_responses[randint(0, len(cached_responses) - 1)]['data']['images']['original']['mp4']

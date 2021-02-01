@@ -30,6 +30,9 @@ env-file-dev:
 	. sample.env && \
 	python3 src/app.py
 
+lint:
+	. ~/.virtualenvs/mandalorion-gifs/bin/activate && \
+	flake8 --ignore E501 src
 
 ############
 #  Docker  #

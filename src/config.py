@@ -1,5 +1,6 @@
 from app_config_base import AppConfigBase
 
+
 class AppConfig(AppConfigBase):
     FLASK_ENV: str
     SECRET_KEY: str

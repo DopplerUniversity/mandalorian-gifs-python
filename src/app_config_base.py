@@ -1,4 +1,3 @@
-import os
 from typing import get_type_hints, Union
 
 
@@ -8,6 +7,7 @@ class AppConfigError(Exception):
 
 def _parse_bool(val: Union[str, bool]) -> bool:  # pylint: disable=E1136
     return val if type(val) == bool else val.lower() in ['true', 'yes', '1']
+
 
 # Learn more about using environment variables for app config in Python apps at https://doppler.com/blog/environment-variables-in-python
 class AppConfigBase:
@@ -25,7 +25,7 @@ class AppConfigBase:
 
             # Raise AppConfigError if required field not supplied
             default_value = getattr(self, field, None)
-            if default_value == None and env.get(field) == None:
+            if default_value is None and env.get(field) is None:
                 raise AppConfigError('The {} field is required'.format(field))
 
             # Cast env var value to expected type and raise AppConfigError on failure
