@@ -14,5 +14,5 @@ def index():
     )
     return render_template('index.html', giphy_url=giphy_url)
 
-
-app.run(host=config.HOST, port=config.PORT)
+if __name__ == '__main__':
+    app.run(host=config.HOST, port=config.PORT)

@@ -17,8 +17,13 @@ create-doppler-project:
 	@echo '[info]: Setting GIPHY API KEY'
 	doppler secrets set	GIPHY_API_KEY="$(GIPHY_API_KEY)"
 
-doppler-dev:
-	. ~/.virtualenvs/mandalorion-gifs/bin/activate && doppler run -- python src/app.py
+dev:
+	. ~/.virtualenvs/mandalorion-gifs/bin/activate && \
+	doppler run -- python src/app.py
+
+gunicorn:
+	. ~/.virtualenvs/mandalorion-gifs/bin/activate && \
+	doppler run -- gunicorn --pythonpath src app:app
 
 env-file-dev:
 	. ~/.virtualenvs/mandalorion-gifs/bin/activate && \
@@ -49,11 +54,10 @@ HEROKU_APP=mandalorion-gifs
 
 heroku-create:
 	heroku apps:create --team $(HEROKU_TEAM) $(HEROKU_APP)
-	git remote rename heroku $(HEROKU_APP)
 	$(MAKE) heroku-deploy HEROKU_APP=$(HEROKU_APP)
 
 heroku-deploy:
-	git push $(HEROKU_APP) main -f
+	git push $(HEROKU_APP)
 	heroku open --app $(HEROKU_APP)
 
 heroku-destroy:
