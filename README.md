@@ -1,4 +1,4 @@
-# Random Mandalorion GIF Generator
+# Mandalorion GIF Generator
 
 This repository is used as part of a workshop on environment variables for app config and secrets using the [Doppler CLI](https://docs.doppler.com/docs).
 

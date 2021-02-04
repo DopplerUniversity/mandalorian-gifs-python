@@ -52,15 +52,16 @@ docker:
 #  HEROKU  #
 ############
 
-HEROKU_TEAM=dagobah-systems
+HEROKU_TEAM=dopplerhq
 HEROKU_APP=mandalorion-gifs
 
 heroku-create:
 	heroku apps:create --team $(HEROKU_TEAM) $(HEROKU_APP)
+	git remote rename heroku $(HEROKU_APP)
 	$(MAKE) heroku-deploy HEROKU_APP=$(HEROKU_APP)
 
 heroku-deploy:
-	git push $(HEROKU_APP)
+	git push $(HEROKU_APP) master -f
 	heroku open --app $(HEROKU_APP)
 
 heroku-destroy:

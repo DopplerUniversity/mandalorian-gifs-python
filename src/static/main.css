@@ -6,6 +6,10 @@ h1 {
   text-transform: uppercase;
 }
 
+.doppler-logo {
+  width: 200px;
+}
+
 .logo {
   max-height: 150px;
 }
