@@ -28,7 +28,7 @@ class AppConfigBase:
             if default_value is None and env.get(field) is None:
                 raise AppConfigError('The {} field is required'.format(field))
 
-            # Cast env var value to expected type and raise AppConfigError on failure            
+            # Cast env var value to expected type and raise AppConfigError on failure
             try:
                 custom_parse_method = getattr(self, '_parse_{}'.format(field.lower()), None)
                 var_type = get_type_hints(self)[field]

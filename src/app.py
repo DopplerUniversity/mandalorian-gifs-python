@@ -1,9 +1,12 @@
 import os
 from flask import Flask, render_template
+from flask_cachebuster import CacheBuster
 from config import AppConfig
 import giphy
 
+
 app = Flask(__name__)
+CacheBuster(config={'extensions': ['.js', '.css', '.png'], 'hash_size': 5}).init_app(app)
 config = AppConfig(os.environ)
 
 
