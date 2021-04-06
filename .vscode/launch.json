@@ -1,0 +1,33 @@
+{
+    "version": "0.2.0",
+    // Allows running running of Python app using `doppler run -- src/app.py`
+    "configurations": [
+        {
+            "name": "Python: Attach with Process Id",
+            "type": "python",
+            "request": "attach",
+            "processId": "${command:pickProcess}"
+        },
+        // Secrets loaded from a .env file during debug session
+        {
+            "name": "Python: Doppler .env file",
+            "type": "python",
+            "python": "${env:HOME}/.virtualenvs/mandalorion-gifs/bin/python",
+            "request": "launch",
+            "program": "src/app.py",
+            "env": {
+                "FLASK_DEBUG": "0"
+            },
+            "envFile": "${workspaceFolder}/.env",
+            "preLaunchTask": "doppler-env-create",
+            "postDebugTask": "doppler-env-remove"            
+        },
+        {
+            "name": "Python: Dev Container",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}/src/app.py",
+            "console": "integratedTerminal"
+        }
+    ]
+}

@@ -1,0 +1,22 @@
+// See https://aka.ms/devcontainer.json for spec
+{
+  "name": "Mandalorion GIFs",
+  "settings": {
+    "python.pythonPath": "/usr/local/bin/python",
+  },
+  "extensions": [
+    "ms-python.python"
+  ],
+  "build": {
+    "dockerfile": "../Dockerfile"
+  },
+  "postCreateCommand": "apk add git && pip install --upgrade pip setuptools -r requirements-dev.txt",
+  "forwardPorts": [
+    8080
+  ],
+  // Generate manually by running `make devcontainer-env`
+  "runArgs": [
+    "--env-file",
+    ".devcontainer/.env"
+  ]
+}

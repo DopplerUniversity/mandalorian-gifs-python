@@ -1,38 +1,58 @@
+SHELL=/bin/bash
+VENVDIR?=${HOME}/.virtualenvs
+WORKDIR?=$(shell basename "$$PWD")
+VENV?=$(VENVDIR)/$(WORKDIR)/bin
+PYTHON?=$(VENV)/python
+ACTIVATE?=$(VENV)/activate
+
 create-virtual-env:
 	mkdir -p ~/.virtualenvs && \
-	python3 -m venv ~/.virtualenvs/mandalorion-gifs && \
-	. ~/.virtualenvs/mandalorion-gifs/bin/activate && \
-	pip install --upgrade pip -r requirements.txt
-	@echo '[info]: Now run `. ~/.virtualenvs/mandalorion-gifs/bin/activate` to activate the virtual environment'
+	python3 -m venv $(VENVDIR)/$(WORKDIR) && \
+	. $(ACTIVATE) && \
+	pip install --upgrade pip setuptools -r requirements-dev.txt
 
 # USAGE: make create-doppler-project GIPHY_API_KEY=XXXX
 create-doppler-project:
 	@echo '[info]: Creating "mandalorion-gifs" project'
-	doppler projects create mandalorion-gifs
-	doppler setup
+	@doppler projects create mandalorion-gifs
+	@doppler setup --no-prompt
+
 	@echo '[info]: Uploading default secrets'
-	doppler secrets upload sample.env
+	@doppler secrets upload --config dev sample.env
+	@doppler secrets upload --config prd sample.env	
+
 	@echo '[info]: Randomizing Flask secret key'
-	doppler secrets set SECRET_KEY "$(shell python -c 'import uuid; print(uuid.uuid4())')"
+	@doppler secrets set --config dev SECRET_KEY "$(shell python -c 'import uuid; print(uuid.uuid4())')"
+	@doppler secrets set --config prd SECRET_KEY "$(shell python -c 'import uuid; print(uuid.uuid4())')"
+
+	@echo '[info]: Adjusting production values'	
+	@doppler secrets delete --config stg FLASK_DEBUG FLASK_ENV GIPHY_API_KEY GIPHY_RATING GIPHY_TAG HOST PORT SECRET_KEY -y
+	@doppler secrets delete --config prd FLASK_DEBUG FLASK_ENV PORT -y
+	@doppler secrets set --config prd HOST "0.0.0.0"
+
 	@echo '[info]: Setting GIPHY API KEY'
-	doppler secrets set	GIPHY_API_KEY="$(GIPHY_API_KEY)"
+	@doppler secrets set GIPHY_API_KEY="$(GIPHY_API_KEY)"
+	@doppler secrets set --config prd GIPHY_API_KEY="$(GIPHY_API_KEY)"
+
+	@echo '[info]: Opening the Doppler dashboard'
+	@doppler open
 
 dev:
-	. ~/.virtualenvs/mandalorion-gifs/bin/activate && \
-	doppler run -- python src/app.py
+	doppler run -- $(PYTHON) src/app.py
 
-gunicorn:
-	. ~/.virtualenvs/mandalorion-gifs/bin/activate && \
-	doppler run -- gunicorn --pythonpath src app:app
-
-env-file-dev:
-	. ~/.virtualenvs/mandalorion-gifs/bin/activate && \
-	. sample.env && \
-	python3 src/app.py
+# Create a debuggable process
+dev-debug:
+	doppler run -- $(PYTHON) -m debugpy --listen 0.0.0.0:5678 src/app.py
 
 lint:
-	. ~/.virtualenvs/mandalorion-gifs/bin/activate && \
-	flake8 --ignore E501 src
+	. $(ACTIVATE) flake8 --ignore E501 src
+
+gunicorn:
+	. $(ACTIVATE) && doppler run -- gunicorn --pythonpath src app:app
+
+devcontainer-env:
+	doppler secrets download --no-file --format docker > .devcontainer/.env
+	
 
 ############
 #  Docker  #
@@ -42,10 +62,21 @@ CONTAINER_NAME=mandalorion-gifs
 IMAGE_NAME=dopplerhq/mandalorion-gifs
 
 docker-build:
+	docker image pull python:alpine
 	docker image build -t $(IMAGE_NAME):latest .
 
 docker:
-	./bin/docker.sh
+	# Runs as root user in order to install dev packages
+	docker container run \
+		-it \
+		--init \
+		--rm \
+		--name mandalorion-gifs \
+		-v $(shell pwd):/usr/src/app:cached \
+		-u root \
+		-p $(shell doppler secrets get PORT --plain):$(shell doppler secrets get PORT --plain) \
+		--env-file <(doppler secrets download --no-file --format docker) \
+		$(IMAGE_NAME)
 
 
 ############

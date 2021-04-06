@@ -24,30 +24,35 @@ Learn more at our [product website](https://doppler.com) or [docs](https://docs.
 
 ## Local development
 
-Setting up for local development is automated through commands in the `Makefile`, but these can be run manually if `make` is not installed.
+Setting up for local development is mostly-automated through commands in the `Makefile`, but these can be run manually if `make` is not installed.
 
-1. Clone the [Mandalorion GIFs repo](https://github.com/DopplerHQ/mandalorion-gifs):
+1. Install the latest version of Python 3:
+```sh
+brew install python
+```
+
+2. Clone the [Mandalorion GIFs repo](https://github.com/DopplerHQ/mandalorion-gifs):
 ```sh
 git clone https://github.com/DopplerHQ/mandalorion-gifs
 ```
 
-2. Create the virtual environment:
+3. Create the virtual environment:
 ```sh
 make create-virtual-env
 ```
 
-3. [Install the Doppler CLI](https://docs.doppler.com/docs/enclave-installation):
+4. [Install the Doppler CLI](https://docs.doppler.com/docs/enclave-installation):
 ```sh
 # See https://docs.doppler.com/docs/enclave-installation for other operating systems and environments, e.g. Docker
 brew install dopplerhq/cli/doppler
 ```
 
-4. Login and create your free Doppler account on the Community plan:
+5. Login and create your free Doppler account on the Community plan:
 ```sh
 doppler login
 ```
 
-5. Create the Doppler project providing the [GIPHY API KEY](https://developers.giphy.com/docs/api/#quick-start-guide):
+6. Create the Doppler project providing the [GIPHY API KEY](https://developers.giphy.com/docs/api/#quick-start-guide):
 ```sh
 make create-doppler-project GIPHY_API_KEY=YOUR_KEY_HERE
 ```
