@@ -50,9 +50,12 @@ lint:
 gunicorn:
 	. $(ACTIVATE) && doppler run -- gunicorn --pythonpath src app:app
 
-devcontainer-env:
+devcontainer-env-file:
 	doppler secrets download --no-file --format docker > .devcontainer/.env
-	
+
+devcontainer-service-token:
+	./bin/devcontainer-service-token.sh
+
 
 ############
 #  Docker  #
