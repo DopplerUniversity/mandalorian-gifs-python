@@ -12,7 +12,7 @@
             }            
         },
         {
-            "name": "python: doppler server",
+            "name": "python: server env-file",
             "type": "python",
             "python": "${env:HOME}/.virtualenvs/mandalorion-gifs/bin/python",
             "request": "launch",
@@ -23,6 +23,17 @@
             "envFile": "${workspaceFolder}/.env",
             "preLaunchTask": "doppler-env-create",
             "postDebugTask": "doppler-env-remove"
+        },
+        {
+            "name": "python: server doppler-env",
+            "type": "python",
+            "python": "${env:HOME}/.virtualenvs/mandalorion-gifs/bin/python",
+            "request": "launch",
+            "program": "src/app.py",
+            "env": {
+                "FLASK_DEBUG": "0",
+                "DOPPLER_ENV": "1"
+            }            
         },
         {
             "name": "python: dev container",

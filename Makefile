@@ -9,7 +9,8 @@ create-virtual-env:
 	mkdir -p ~/.virtualenvs && \
 	python3 -m venv $(VENVDIR)/$(WORKDIR) && \
 	. $(ACTIVATE) && \
-	pip install --upgrade pip setuptools -r requirements-dev.txt
+	pip install --upgrade pip setuptools && \
+	pip install -r requirements-dev.txt
 
 # USAGE: make create-doppler-project GIPHY_API_KEY=XXXX
 create-doppler-project:
@@ -35,7 +36,7 @@ create-doppler-project:
 	@doppler secrets set --config prd GIPHY_API_KEY="$(GIPHY_API_KEY)"
 
 	@echo '[info]: Opening the Doppler dashboard'
-	@doppler open
+	@doppler open dashboard
 
 dev:
 	doppler run -- $(PYTHON) src/app.py
@@ -53,8 +54,10 @@ gunicorn:
 devcontainer-env-file:
 	doppler secrets download --no-file --format docker > .devcontainer/.env
 
-devcontainer-service-token:
-	./bin/devcontainer-service-token.sh
+devcontainer-doppler-token:
+	@echo "DOPPLER_TOKEN=$(shell doppler configure get token --plain)" > .devcontainer/.env
+	@echo "DOPPLER_PROJECT=$(shell doppler configure get project --plain)" >> .devcontainer/.env
+	@echo "DOPPLER_CONFIG=$(shell doppler configure get config --plain)" >> .devcontainer/.env
 
 
 ############

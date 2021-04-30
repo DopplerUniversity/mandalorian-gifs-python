@@ -1,5 +1,6 @@
 -r requirements.txt
 
-flake8==3.8.4
-debugpy==1.2.1
-python-dotenv==0.17.0
+flake8
+debugpy
+python-dotenv
+git+https://github.com/dopplerhq/python-doppler-env.git@main#egg=doppler_env
