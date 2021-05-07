@@ -1,4 +1,4 @@
-FROM python:alpine
+FROM python:3.9-alpine
 
 SHELL ["/bin/ash", "-eo", "pipefail", "-c"]
 LABEL maintainer="Ryan Blunden <ryan.blunden@doppler.com>"
@@ -8,7 +8,7 @@ LABEL maintainer="Ryan Blunden <ryan.blunden@doppler.com>"
 RUN apk add --no-cache bind-tools gnupg git
 
 # Use to cache bust system dependencies
-ENV LAST_UPDATED 2021-04-07
+ENV LAST_UPDATED 2021-05-07
 
 # Install Doppler CLI
 RUN (curl -Ls https://cli.doppler.com/install.sh || wget -qO- https://cli.doppler.com/install.sh) | sh

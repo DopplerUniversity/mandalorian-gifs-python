@@ -27,32 +27,38 @@ Learn more at our [product website](https://doppler.com) or [docs](https://docs.
 Setting up for local development is mostly-automated through commands in the `Makefile`, but these can be run manually if `make` is not installed.
 
 1. Install the latest version of Python 3:
+
 ```sh
 brew install python
 ```
 
 2. Clone the [Mandalorion GIFs repo](https://github.com/DopplerHQ/mandalorion-gifs):
+
 ```sh
 git clone https://github.com/DopplerHQ/mandalorion-gifs
 ```
 
-3. Create the virtual environment:
+3. Create the virtual environment (which includes installing dev dependencies):
+
 ```sh
 make create-virtual-env
 ```
 
 4. [Install the Doppler CLI](https://docs.doppler.com/docs/enclave-installation):
+
 ```sh
 # See https://docs.doppler.com/docs/enclave-installation for other operating systems and environments, e.g. Docker
 brew install dopplerhq/cli/doppler
 ```
 
 5. Login and create your free Doppler account on the Community plan:
+
 ```sh
 doppler login
 ```
 
 6. Create the Doppler project providing the [GIPHY API KEY](https://developers.giphy.com/docs/api/#quick-start-guide):
+
 ```sh
 make create-doppler-project GIPHY_API_KEY=YOUR_KEY_HERE
 ```
@@ -62,8 +68,37 @@ make create-doppler-project GIPHY_API_KEY=YOUR_KEY_HERE
 Once you've created the Doppler project, you can run the app locally:
 
 ```sh
-make doppler-dev
+make dev
 ```
+
+## Visual Studio Code
+
+### Debugging locally
+
+To debug in Visual Studio code, simply run the `python: server` launch configuration.
+
+
+### Debugging in a dev container
+
+To debug in a Dev Container, you'll need to open the project using the `code` binary from an external terminal window in order to set the environment variables required by the container.
+
+To do this:
+
+1. Close this project in Visual Studio Code
+2. Open a new terminal 
+3. Change into the `mandalorion-gifs` directory
+4. Launch Visual Studio Code from the terminal and setting the required Doppler environment variables:
+
+```sh
+DOPPLER_TOKEN=$(doppler configure get token --plain) \
+DOPPLER_PROJECT=$(doppler configure get project --plain) \
+DOPPLER_CONFIG=$(doppler configure get config --plain) \
+code .
+```
+
+Now re-open the project as a dev container by running the command: `Remote-Containers: Rebuild and Reopen in Container`.
+
+The once the dev container has been built and is ready, run the `python: dev container` launch configuration.
 
 ## Deploying the app to Heroku
 
