@@ -43,10 +43,11 @@ dev:
 
 # Create a debuggable process
 dev-debug:
+	. $(ACTIVATE) && pip install debugpy
 	doppler run -- $(PYTHON) -m debugpy --listen 0.0.0.0:5678 src/app.py
 
 lint:
-	. $(ACTIVATE) flake8 --ignore E501 src
+	. $(ACTIVATE) && flake8 --ignore E501 src
 
 gunicorn:
 	. $(ACTIVATE) && doppler run -- gunicorn --pythonpath src app:app

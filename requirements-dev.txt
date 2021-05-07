@@ -1,6 +1,4 @@
 -r requirements.txt
 
 flake8
-debugpy
-python-dotenv
-git+https://github.com/dopplerhq/python-doppler-env.git@main#egg=doppler_env
+doppler-env

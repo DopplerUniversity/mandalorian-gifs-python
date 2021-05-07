@@ -7,9 +7,11 @@ import requests
 data_file_path = '{}/data/gifs.json'.format(path.dirname(__file__))
 cached_responses = json.loads(open(data_file_path).read())
 
+
 def get_cached_response():
     print('[info]:  Serving pre-cached response.')
     return cached_responses[randint(0, len(cached_responses) - 1)]['data']['images']['original']['mp4']
+
 
 def get_random(api_key: str, tag: str, rating: str) -> str:
     if not api_key:

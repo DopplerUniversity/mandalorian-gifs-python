@@ -1,4 +1,5 @@
 {
+    // "python.pythonPath": "~/.virtualenvs/mandalorion-gifs/bin/python"
     // Path to virtualenv Python. Create virtualenv by running `make create-virtual-env`
     // Currently disabled because this setting is (incorrectly) overriding the `python.pythonPath` in devcontainer.json
     // Fix for now is to set the path to the virtualenv Python in each launch.json configuration
