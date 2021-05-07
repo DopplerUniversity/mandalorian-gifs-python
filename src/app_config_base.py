@@ -1,12 +1,14 @@
 from typing import get_type_hints, Union
-
-
-class AppConfigError(Exception):
-    pass
+import sys
 
 
 def _parse_bool(val: Union[str, bool]) -> bool:  # pylint: disable=E1136
     return val if type(val) == bool else val.lower() in ['true', 'yes', '1']
+
+
+def _app_config_error(message, exit_code=1):
+    sys.stderr.write('\n[error]: {}\n\n'.format(message))
+    exit(exit_code)
 
 
 # Learn more about using environment variables for app config in Python apps at https://doppler.com/blog/environment-variables-in-python
@@ -23,12 +25,10 @@ class AppConfigBase:
             if not field.isupper():
                 continue
 
-            # Raise AppConfigError if required field not supplied
             default_value = getattr(self, field, None)
             if default_value is None and env.get(field) is None:
-                raise AppConfigError('The {} field is required'.format(field))
+                _app_config_error('The {} environment variable is required'.format(field))
 
-            # Cast env var value to expected type and raise AppConfigError on failure
             try:
                 custom_parse_method = getattr(self, '_parse_{}'.format(field.lower()), None)
                 var_type = get_type_hints(self)[field]
@@ -44,7 +44,7 @@ class AppConfigBase:
 
                 self.__setattr__(field, value)
             except ValueError:
-                raise AppConfigError(
+                _app_config_error(
                     'Unable to cast value of "{}" to type "{}" for "{}" field'.format(
                         env[field], var_type, field
                     )
