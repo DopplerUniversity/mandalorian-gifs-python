@@ -12,6 +12,9 @@ create-virtual-env:
 	pip install --upgrade pip setuptools && \
 	pip install -r requirements-dev.txt
 
+activate:
+	. $(ACTIVATE)
+
 # USAGE: make create-doppler-project GIPHY_API_KEY=XXXX
 create-doppler-project:
 	@echo '[info]: Creating "mandalorion-gifs" project'
@@ -22,14 +25,17 @@ create-doppler-project:
 	@doppler secrets upload --config dev sample.env
 	@doppler secrets upload --config prd sample.env	
 
-	@echo '[info]: Randomizing Flask secret key'
+	@echo '[info]: Setting Flask secret key'
 	@doppler secrets set --config dev SECRET_KEY "$(shell python -c 'import uuid; print(uuid.uuid4())')"
 	@doppler secrets set --config prd SECRET_KEY "$(shell python -c 'import uuid; print(uuid.uuid4())')"
 
+	@echo '[info]: Setting Webhook secret'
+	@doppler secrets set --config dev WEBHOOK_SECRET "$(shell python -c 'import uuid; print(uuid.uuid4())')"
+	@doppler secrets set --config prd WEBHOOK_SECRET "$(shell python -c 'import uuid; print(uuid.uuid4())')"
+
 	@echo '[info]: Adjusting production values'	
 	@doppler secrets delete --config stg FLASK_DEBUG FLASK_ENV GIPHY_API_KEY GIPHY_RATING GIPHY_TAG HOST PORT SECRET_KEY -y
-	@doppler secrets delete --config prd FLASK_DEBUG FLASK_ENV PORT -y
-	@doppler secrets set --config prd HOST "0.0.0.0"
+	@doppler secrets delete --config prd FLASK_DEBUG FLASK_ENV -y
 
 	@echo '[info]: Setting GIPHY API KEY'
 	@doppler secrets set GIPHY_API_KEY="$(GIPHY_API_KEY)"
@@ -42,10 +48,19 @@ dev:
 	doppler run -- $(PYTHON) src/app.py
 
 lint:
-	. $(ACTIVATE) && flake8 --ignore E501 src
+	flake8 --ignore E501 src
+
+format:
+	black --skip-string-normalization --line-length 120 src
 
 gunicorn:
-	. $(ACTIVATE) && doppler run -- gunicorn --pythonpath src app:app
+	doppler run -- gunicorn \
+		app:app \
+		--pythonpath=src \
+		--pid app.pid \
+		--reload \
+		--workers 1 \
+		--bind localhost:8080
 
 devcontainer-doppler-token:
 	@echo "DOPPLER_TOKEN=$(shell doppler configure get token --plain)" > .devcontainer/.env
@@ -73,10 +88,12 @@ docker:
 		--name mandalorion-gifs \
 		-v $(shell pwd):/usr/src/app:cached \
 		-u root \
-		-p $(shell doppler secrets get PORT --plain):$(shell doppler secrets get PORT --plain) \
+		-p 8080:8080 \
 		--env-file <(doppler secrets download --no-file --format docker) \
-		$(IMAGE_NAME)
+		$(IMAGE_NAME) $(CMD)
 
+docker-exec:
+	docker exec -it mandalorion-gifs sh
 
 ############
 #  HEROKU  #

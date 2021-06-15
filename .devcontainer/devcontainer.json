@@ -10,7 +10,7 @@
   "build": {
     "dockerfile": "../Dockerfile"
   },
-  "postCreateCommand": "pip install  --quiet --no-cache-dir -r requirements-dev.txt",
+  "postCreateCommand": "apk add make nano gcc musl-dev && pip install --no-cache-dir -r requirements-dev.txt",
   "forwardPorts": [
     8080
   ],

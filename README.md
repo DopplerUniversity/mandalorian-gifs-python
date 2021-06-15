@@ -16,7 +16,7 @@ Learn more at our [product website](https://doppler.com) or [docs](https://docs.
 
 ## Requirements
 
-- Python 3.8 or above
+- Python 3.9 or above
 - Git
 - Make
 - [Doppler CLI](https://docs.doppler.com/docs/enclave-installation) (used to manage environment variables)
@@ -44,20 +44,26 @@ git clone https://github.com/DopplerHQ/mandalorion-gifs
 make create-virtual-env
 ```
 
-4. [Install the Doppler CLI](https://docs.doppler.com/docs/enclave-installation):
+4. Activate virtual environment:
+
+```sh
+eval $(make activate)
+```
+
+5. [Install the Doppler CLI](https://docs.doppler.com/docs/enclave-installation):
 
 ```sh
 # See https://docs.doppler.com/docs/enclave-installation for other operating systems and environments, e.g. Docker
 brew install dopplerhq/cli/doppler
 ```
 
-5. Login and create your free Doppler account on the Community plan:
+6. Login and create your free Doppler account on the Community plan:
 
 ```sh
 doppler login
 ```
 
-6. Create the Doppler project providing the [GIPHY API KEY](https://developers.giphy.com/docs/api/#quick-start-guide):
+7. Create the Doppler project providing the [GIPHY API KEY](https://developers.giphy.com/docs/api/#quick-start-guide):
 
 ```sh
 make create-doppler-project GIPHY_API_KEY=YOUR_KEY_HERE

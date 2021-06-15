@@ -8,18 +8,21 @@ LABEL maintainer="Ryan Blunden <ryan.blunden@doppler.com>"
 RUN apk add --no-cache bind-tools gnupg git
 
 # Use to cache bust system dependencies
-ENV LAST_UPDATED 2021-05-07
+ENV LAST_UPDATED 2021-06-15
 
-# Install Doppler CLI
-RUN (curl -Ls https://cli.doppler.com/install.sh || wget -qO- https://cli.doppler.com/install.sh) | sh
+# Doppler CLI
+RUN wget -q -t3 'https://packages.doppler.com/public/cli/rsa.8004D9FF50437357.key' -O /etc/apk/keys/cli@doppler-8004D9FF50437357.rsa.pub && \
+    echo 'https://packages.doppler.com/public/cli/alpine/any-version/main' | tee -a /etc/apk/repositories && \
+    apk add doppler
 
 WORKDIR /usr/src/app
 
-COPY requirements.txt .
-RUN pip install --quiet --no-cache-dir --upgrade pip setuptools  -r requirements.txt
+COPY requirements*.txt .
+RUN pip install --quiet --no-cache-dir --upgrade pip setuptools && \
+    pip install --quiet --no-cache-dir -r requirements.txt
 
 COPY src .
 
 EXPOSE 8080
 
-CMD ["gunicorn", "--pythonpath", "src", "app:app"]
+CMD ["gunicorn", "app:app", "--pythonpath=src", "--pid=app.pid", "--bind=0.0.0.0:8080"]

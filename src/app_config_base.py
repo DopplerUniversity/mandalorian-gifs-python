@@ -7,7 +7,7 @@ def _parse_bool(val: Union[str, bool]) -> bool:  # pylint: disable=E1136
 
 
 def _app_config_error(message, exit_code=1):
-    sys.stderr.write('\n[error]: {}\n\n'.format(message))
+    sys.stderr.write(f'\n[error]: {message}\n\n')
     exit(exit_code)
 
 
@@ -21,22 +21,27 @@ class AppConfigBase:
     '''
 
     def __init__(self, env):
+        config_class = type(self).__name__
         for field in self.__annotations__:
             if not field.isupper():
                 continue
 
             default_value = getattr(self, field, None)
             if default_value is None and env.get(field) is None:
-                _app_config_error('The {} environment variable is required'.format(field))
+                _app_config_error(f'{config_class} class requires the {field} environment variable')
 
             try:
-                custom_parse_method = getattr(self, '_parse_{}'.format(field.lower()), None)
+                custom_parse_method = getattr(self, f'_parse_{field.lower()}', None)
                 var_type = get_type_hints(self)[field]
                 raw_value = env.get(field, default_value)
 
                 if custom_parse_method:
                     value = custom_parse_method(raw_value)
-                    assert type(value) == var_type
+                    value_type = type(value)
+                    if value_type != var_type:
+                        _app_config_error(
+                            f'{config_class}.{field} field expected type {var_type.__name__} but receieved {value_type.__name__}'
+                        )
                 elif var_type == bool:
                     value = _parse_bool(env.get(field, default_value))
                 else:
@@ -45,9 +50,7 @@ class AppConfigBase:
                 self.__setattr__(field, value)
             except ValueError:
                 _app_config_error(
-                    'Unable to cast value of "{}" to type "{}" for "{}" field'.format(
-                        env[field], var_type, field
-                    )
+                    f'{config_class}.{field} value "{env[field]}" could not be cast to type {var_type.__name__}'
                 )
 
     def __repr__(self):

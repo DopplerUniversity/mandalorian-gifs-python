@@ -136,3 +136,6 @@ dmypy.json
 
 # macos
 .DS_Store
+
+# other
+app.pid
