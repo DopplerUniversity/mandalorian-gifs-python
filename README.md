@@ -1,10 +1,10 @@
 # Mandalorion GIF Generator
 
-This repository is used as part of a workshop on environment variables for app config and secrets using the [Doppler CLI](https://docs.doppler.com/docs).
+![Mandalorion GIFs screenshot](https://repository-images.githubusercontent.com/334072139/f5912289-ef41-4347-99a7-2e820a95a8ba)
 
-The instructions below are for macOS but can easily be adapted for Linux and Windows environments.
+Random Mandalorion GIFs generator using [Doppler](https://www.doppler.com) for managing app configuration and secrets via environment variables.
 
-> NOTE: If using Windows, use the [Python venv docs](https://docs.python.org/3/library/venv.html) to create and activate your virtual environment in the Command line or PowerShell.
+<a href="https://dashboard.doppler.com/workplace/template/import?template=https%3A%2F%2Fgithub.com%2FDopplerUniversity%2Fmandalorion-gifs-python%2Fblob%2Fmain%2Fdoppler-template.yaml"/><img src="https://raw.githubusercontent.com/DopplerHQ/app-config-templates/main/import-to-doppler.png" width="166" height="32" alt="Import to Doppler" /></a>
 
 ## What is Doppler?
 
@@ -21,6 +21,10 @@ Learn more at our [product website](https://doppler.com) or [docs](https://docs.
 - Make
 - [Doppler CLI](https://docs.doppler.com/docs/enclave-installation) (used to manage environment variables)
 - Create a GIPHY app in order to generate an API (not SDK) key ([see instructions](https://developers.giphy.com/docs/api/#quick-start-guide))
+
+The instructions following are for macOS but can easily be adapted for Linux and Windows environments.
+
+> NOTE: If using Windows, use the [Python venv docs](https://docs.python.org/3/library/venv.html) to create and activate your virtual environment in the Terminal or PowerShell.
 
 ## Local development
 
