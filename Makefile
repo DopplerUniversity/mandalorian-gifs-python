@@ -62,10 +62,10 @@ gunicorn:
 		--workers 1 \
 		--bind localhost:8080
 
-devcontainer-doppler-token:
-	@echo "DOPPLER_TOKEN=$(shell doppler configure get token --plain)" > .devcontainer/.env
-	@echo "DOPPLER_PROJECT=$(shell doppler configure get project --plain)" >> .devcontainer/.env
-	@echo "DOPPLER_CONFIG=$(shell doppler configure get config --plain)" >> .devcontainer/.env
+env-file-dev:
+	. ~/.virtualenvs/mandalorion-gifs/bin/activate && \
+	. ./sample.env && \
+	python3 src/app.py
 
 
 ############
