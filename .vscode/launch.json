@@ -1,0 +1,26 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "python: server",
+      "type": "python",
+      "python": "${env:HOME}/.virtualenvs/mandalorion-gifs/bin/python",
+      "request": "launch",
+      "program": "src/app.py",
+      "env": {
+        "FLASK_DEBUG": "0",
+        "DOPPLER_ENV": "1"
+      }
+    },
+    {
+      "name": "python: dev container",
+      "type": "python",
+      "request": "launch",
+      "program": "src/app.py",
+      "env": {
+        "FLASK_DEBUG": "0",
+        "DOPPLER_ENV": "1"
+      }
+    }    
+  ]
+}

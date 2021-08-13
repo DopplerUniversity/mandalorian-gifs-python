@@ -1,24 +1,25 @@
-body {
-  text-shadow: 0 0.05rem 0.1rem rgba(0, 0, 0, 0.5);
+.page-container {
+  height: 100vh;
 }
 
-h1 {
-  text-transform: uppercase;
+.doppler-logo {
+  width: 200px;
 }
 
 .logo {
   max-height: 150px;
 }
 
-video {
-  max-height: 400px;
-}
-.cover-container {
-  max-width: 60em;
-}
-
+header,
+main,
 footer {
   width: 100%;
+}
+
+video {
+  position: relative;
+  z-index: 1000;
+  max-height: 400px;
 }
 
 .sr-only {
@@ -35,8 +36,7 @@ footer {
 
 @media (min-height: 768px) {
   footer {
-    width: 100%;
     position: absolute;
-    bottom: 10px;
+    bottom: 0;
   }
 }

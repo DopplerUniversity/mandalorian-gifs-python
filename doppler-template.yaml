@@ -1,0 +1,44 @@
+projects:
+  - name: 'mandalorion-gifs'
+    description: 'Mandalorion GIFS generator'
+    environments:
+      - name: 'Development'
+        slug: 'dev'
+        configs:
+          - slug: 'dev'
+      - name: 'Staging'
+        slug: 'stg'
+        configs:
+          - slug: 'stg'
+      - name: 'Production'
+        slug: 'prd'
+        configs:
+          - slug: 'prd'
+    secrets:
+      dev:
+        FLASK_ENV: 'development'
+        SECRET_KEY: ''
+        WEBHOOK_SECRET: ''
+        HOST: 'localhost'
+        PORT: '8080'
+        GIPHY_API_KEY: ''
+        GIPHY_TAG: 'mandalorion'
+        GIPHY_RATING: 'pg13'
+      stg:
+        FLASK_ENV: 'production'
+        SECRET_KEY: ''
+        WEBHOOK_SECRET: ''
+        HOST: 'localhost'
+        PORT: '8080'
+        GIPHY_API_KEY: ''
+        GIPHY_TAG: 'mandalorion'
+        GIPHY_RATING: 'pg13'
+      prd:
+        FLASK_ENV: 'production'
+        SECRET_KEY: ''
+        WEBHOOK_SECRET: ''
+        HOST: 'localhost'
+        PORT: '8080'
+        GIPHY_API_KEY: ''
+        GIPHY_TAG: 'mandalorion'
+        GIPHY_RATING: 'pg13'

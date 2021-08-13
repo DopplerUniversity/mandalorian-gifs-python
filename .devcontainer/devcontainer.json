@@ -1,0 +1,22 @@
+// See https://aka.ms/devcontainer.json for spec
+{
+  "name": "Mandalorion GIFs",
+  "settings": {
+    "python.pythonPath": "/usr/local/bin/python",
+  },
+  "extensions": [
+    "ms-python.python"
+  ],
+  "build": {
+    "dockerfile": "../Dockerfile"
+  },
+  "postCreateCommand": "apk add make nano gcc musl-dev && pip install --no-cache-dir -r requirements-dev.txt",
+  "forwardPorts": [
+    8080
+  ],
+  "containerEnv": {
+    "DOPPLER_TOKEN": "${localEnv:DOPPLER_TOKEN}",
+    "DOPPLER_PROJECT": "${localEnv:DOPPLER_PROJECT}",
+    "DOPPLER_CONFIG": "${localEnv:DOPPLER_CONFIG}"
+  }
+}
