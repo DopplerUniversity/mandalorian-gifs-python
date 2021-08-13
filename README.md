@@ -4,7 +4,7 @@
 
 Random Mandalorion GIFs generator using [Doppler](https://www.doppler.com) for managing app configuration and secrets via environment variables.
 
-<a href="https://dashboard.doppler.com/workplace/template/import?template=https%3A%2F%2Fgithub.com%2FDopplerUniversity%2Fmandalorion-gifs-python%2Fblob%2Fmain%2Fdoppler-template.yaml"/><img src="https://raw.githubusercontent.com/DopplerHQ/app-config-templates/main/import-to-doppler.png" width="166" height="32" alt="Import to Doppler" /></a>
+<a href="https://dashboard.doppler.com/workplace/template/import?template=https%3A%2F%2Fgithub.com%2FDopplerUniversity%2Fmandalorion-gifs-python%2Fblob%2Fmain%2Fdoppler-template.yaml"/><img src="https://raw.githubusercontent.com/DopplerHQ/app-config-templates/main/doppler-button.svg" alt="Import to Doppler" /></a>
 
 ## What is Doppler?
 
