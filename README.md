@@ -4,7 +4,7 @@
 
 Random Mandalorion GIFs generator using [Doppler](https://www.doppler.com) for managing app configuration and secrets via environment variables.
 
-<a href="https://dashboard.doppler.com/workplace/template/import?template=https%3A%2F%2Fgithub.com%2FDopplerUniversity%2Fmandalorion-gifs-python%2Fblob%2Fmain%2Fdoppler-template.yaml"/><img src="https://raw.githubusercontent.com/DopplerHQ/app-config-templates/main/doppler-button.svg" alt="Import to Doppler" /></a>
+<a href="https://dashboard.doppler.com/workplace/template/import?template=https%3A%2F%2Fgithub.com%2FDopplerUniversity%2Fmandalorion-gifs-python%2Fblob%2Fmain%2Fdoppler-template.yaml"/><img src="https://raw.githubusercontent.com/DopplerUniversity/app-config-templates/main/doppler-button.svg" alt="Import to Doppler" /></a>
 
 ## What is Doppler?
 
@@ -36,10 +36,10 @@ Setting up for local development is mostly-automated through commands in the `Ma
 brew install python
 ```
 
-2. Clone the [Mandalorion GIFs repo](https://github.com/DopplerHQ/mandalorion-gifs):
+2. Clone the [Mandalorion GIFs repo](https://github.com/DopplerUniversity/mandalorion-gifs):
 
 ```sh
-git clone https://github.com/DopplerHQ/mandalorion-gifs
+git clone https://github.com/DopplerUniversity/mandalorion-gifs
 ```
 
 3. Create the virtual environment (which includes installing dev dependencies):
