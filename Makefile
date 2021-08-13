@@ -73,7 +73,7 @@ env-file-dev:
 ############
 
 CONTAINER_NAME=mandalorion-gifs
-IMAGE_NAME=dopplerhq/mandalorion-gifs
+IMAGE_NAME=doppleruniversity/mandalorion-gifs
 
 docker-build:
 	docker image pull python:alpine
@@ -99,7 +99,7 @@ docker-exec:
 #  HEROKU  #
 ############
 
-HEROKU_TEAM=dopplerhq
+HEROKU_TEAM=doppleruniversity
 HEROKU_APP=mandalorion-gifs
 
 heroku-create:
