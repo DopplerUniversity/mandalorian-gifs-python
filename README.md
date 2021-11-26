@@ -1,10 +1,10 @@
-# Mandalorion GIF Generator
+# Mandalorian GIF Generator
 
-![Mandalorion GIFs screenshot](https://repository-images.githubusercontent.com/334072139/f5912289-ef41-4347-99a7-2e820a95a8ba)
+![Mandalorian GIFs screenshot](https://repository-images.githubusercontent.com/334072139/f5912289-ef41-4347-99a7-2e820a95a8ba)
 
-Random Mandalorion GIFs generator using [Doppler](https://www.doppler.com) for managing app configuration and secrets via environment variables.
+Random Mandalorian GIFs generator using [Doppler](https://www.doppler.com) for managing app configuration and secrets via environment variables.
 
-<a href="https://dashboard.doppler.com/workplace/template/import?template=https%3A%2F%2Fgithub.com%2FDopplerUniversity%2Fmandalorion-gifs-python%2Fblob%2Fmain%2Fdoppler-template.yaml"/><img src="https://raw.githubusercontent.com/DopplerUniversity/app-config-templates/main/doppler-button.svg" alt="Import to Doppler" /></a>
+[![Import to Doppler](https://raw.githubusercontent.com/DopplerUniversity/app-config-templates/main/doppler-button.svg)](https://dashboard.doppler.com/workplace/template/import?template=https://github.com/DopplerUniversity/mandalorian-gifs-python/blob/main/doppler-template.yaml)
 
 ## What is Doppler?
 
@@ -36,10 +36,10 @@ Setting up for local development is mostly-automated through commands in the `Ma
 brew install python
 ```
 
-2. Clone the [Mandalorion GIFs repo](https://github.com/DopplerUniversityiversity/mandalorion-gifs):
+2. Clone the [Mandalorian GIFs repo](https://github.com/DopplerUniversityiversity/mandalorian-gifs-python):
 
 ```sh
-git clone https://github.com/DopplerUniversityiversity/mandalorion-gifs
+git clone https://github.com/DopplerUniversityiversity/mandalorian-gifs-python
 ```
 
 3. Create the virtual environment (which includes installing dev dependencies):
@@ -96,7 +96,7 @@ To do this:
 
 1. Close this project in Visual Studio Code
 2. Open a new terminal 
-3. Change into the `mandalorion-gifs` directory
+3. Change into the `mandalorian-gifs` directory
 4. Launch Visual Studio Code from the terminal and setting the required Doppler environment variables:
 
 ```sh
@@ -133,7 +133,7 @@ make setup-doppler-production
 To deploy the application to Heroku:
 
 1. [Install the Heroku CLI](https://devcenter.heroku.com/articles/heroku-cli#download-and-install), then login using the `heroku login` command
-2. Edit the Makefile, changing `HEROKU_TEAM` to your team or account name and changing `HEROKU_APP` to be unique, e.g `mandalorion-gifs-ryan`
+2. Edit the Makefile, changing `HEROKU_TEAM` to your team or account name and changing `HEROKU_APP` to be unique, e.g `mandalorian-gifs-ryan`
 3. Create and deploy the app to Heroku:
 ```sh
 make heroku-create
@@ -147,9 +147,9 @@ The [Doppler Heroku integration](https://docs.doppler.com/docs/heroku) enables y
 
 To set up the Heroku integration:
 
-1. Access the **mandalorion-gifs** project from the [Doppler dashboard](https://dashboard.doppler.com/), then click on **Integrations** from the projects menu on the left
+1. Access the **mandalorian-gifs** project from the [Doppler dashboard](https://dashboard.doppler.com/), then click on **Integrations** from the projects menu on the left
 2. Click on Heroku, and authorize the Doppler application
-3. Doppler will then ask you to select the Heroku application and config to sync. Select `mandalorion-gifs` application and **prd** configuration
+3. Doppler will then ask you to select the Heroku application and config to sync. Select `mandalorian-gifs` application and **prd** configuration
 
 Once the integration is set up, go to the [Heroku Dashboard](https://dashboard.heroku.com/), view the settings for your application and click on **Reveal Config Vars** to see the secrets Doppler has synced across.
 

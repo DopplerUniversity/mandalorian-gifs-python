@@ -17,32 +17,7 @@ activate:
 
 # USAGE: make create-doppler-project GIPHY_API_KEY=XXXX
 create-doppler-project:
-	@echo '[info]: Creating "mandalorion-gifs" project'
-	@doppler projects create mandalorion-gifs
-	@doppler setup --no-prompt
-
-	@echo '[info]: Uploading default secrets'
-	@doppler secrets upload --config dev sample.env
-	@doppler secrets upload --config prd sample.env	
-
-	@echo '[info]: Setting Flask secret key'
-	@doppler secrets set --config dev SECRET_KEY "$(shell python -c 'import uuid; print(uuid.uuid4())')"
-	@doppler secrets set --config prd SECRET_KEY "$(shell python -c 'import uuid; print(uuid.uuid4())')"
-
-	@echo '[info]: Setting Webhook secret'
-	@doppler secrets set --config dev WEBHOOK_SECRET "$(shell python -c 'import uuid; print(uuid.uuid4())')"
-	@doppler secrets set --config prd WEBHOOK_SECRET "$(shell python -c 'import uuid; print(uuid.uuid4())')"
-
-	@echo '[info]: Adjusting production values'	
-	@doppler secrets delete --config stg FLASK_DEBUG FLASK_ENV GIPHY_API_KEY GIPHY_RATING GIPHY_TAG HOST PORT SECRET_KEY -y
-	@doppler secrets delete --config prd FLASK_DEBUG FLASK_ENV -y
-
-	@echo '[info]: Setting GIPHY API KEY'
-	@doppler secrets set GIPHY_API_KEY="$(GIPHY_API_KEY)"
-	@doppler secrets set --config prd GIPHY_API_KEY="$(GIPHY_API_KEY)"
-
-	@echo '[info]: Opening the Doppler dashboard'
-	@doppler open dashboard
+	@./bin/create-doppler-project.sh
 
 dev:
 	doppler run -- $(PYTHON) src/app.py
@@ -63,7 +38,7 @@ gunicorn:
 		--bind localhost:8080
 
 env-file-dev:
-	. ~/.virtualenvs/mandalorion-gifs/bin/activate && \
+	. ~/.virtualenvs/mandalorian-gifs/bin/activate && \
 	. ./sample.env && \
 	python3 src/app.py
 
@@ -72,8 +47,8 @@ env-file-dev:
 #  Docker  #
 ############
 
-CONTAINER_NAME=mandalorion-gifs
-IMAGE_NAME=doppleruniversity/mandalorion-gifs
+CONTAINER_NAME=mandalorian-gifs-python
+IMAGE_NAME=doppleruniversity/mandalorian-gifs-python
 
 docker-build:
 	docker image pull python:alpine
@@ -85,7 +60,7 @@ docker:
 		-it \
 		--init \
 		--rm \
-		--name mandalorion-gifs \
+		--name mandalorian-gifs \
 		-v $(shell pwd):/usr/src/app:cached \
 		-u root \
 		-p 8080:8080 \
@@ -93,14 +68,14 @@ docker:
 		$(IMAGE_NAME) $(CMD)
 
 docker-exec:
-	docker exec -it mandalorion-gifs sh
+	docker exec -it mandalorian-gifs sh
 
 ############
 #  HEROKU  #
 ############
 
 HEROKU_TEAM=doppleruniversity
-HEROKU_APP=mandalorion-gifs
+HEROKU_APP=mandalorian-gifs
 
 heroku-create:
 	heroku apps:create --team $(HEROKU_TEAM) $(HEROKU_APP)
