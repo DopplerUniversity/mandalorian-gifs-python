@@ -1,6 +1,15 @@
 import os
+from dotenv import load_dotenv
 from app_config_base import AppConfigBase
 
+
+if os.path.exists('.env'):
+    print('\n[info]: Configuration loaded from Doppler mounted .env file\n')
+    with open ('.env') as env_file:
+        load_dotenv(stream=open ('.env'))
+
+if os.environ.get('DOPPLER_PROJECT'):
+  print(f'\n[info]: Configuration loaded from Doppler ({os.environ["DOPPLER_PROJECT"]} => {os.environ["DOPPLER_CONFIG"]})\n')
 
 class AppConfig(AppConfigBase):
     SECRET_KEY: str

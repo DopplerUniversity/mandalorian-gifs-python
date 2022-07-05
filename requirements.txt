@@ -1,5 +1,6 @@
-flask==1.1.2
-requests==2.25.1
-gunicorn==20.0.4
-flake8==3.8.4
-flask-cachebuster==1.0.0
+flask
+requests
+gunicorn
+flake8
+flask-cachebuster
+python-dotenv

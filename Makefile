@@ -22,6 +22,9 @@ create-doppler-project:
 dev:
 	doppler run -- $(PYTHON) src/app.py
 
+dev-dotenv:
+	doppler run --mount .env -- $(PYTHON) src/app.py
+
 lint:
 	flake8 --ignore E501 src
 

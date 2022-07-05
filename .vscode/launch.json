@@ -4,7 +4,7 @@
     {
       "name": "python: server",
       "type": "python",
-      "python": "${env:HOME}/.virtualenvs/mandalorion-gifs/bin/python",
+      "python": "${env:HOME}/.virtualenvs/mandalorian-gifs-python/bin/python",
       "request": "launch",
       "program": "src/app.py",
       "env": {

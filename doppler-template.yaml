@@ -1,6 +1,5 @@
 projects:
   - name: 'mandalorian-gifs-python'
-    description: 'Mandalorian GIFS generator'
     environments:
       - name: 'Development'
         slug: 'dev'

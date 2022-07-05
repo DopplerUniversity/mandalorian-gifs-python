@@ -8,6 +8,11 @@ echo -e '\n[info]: Creating "mandalorian-gifs-python" project'
 doppler import
 doppler setup --no-interactive --silent
 
+echo -e '\n[info]: Setting SECRET_KEY'
+doppler secrets set --silent --config dev SECRET_KEY "$(uuidgen)"
+doppler secrets set --silent --config stg SECRET_KEY "$(uuidgen)"
+doppler secrets set --silent --config prd SECRET_KEY "$(uuidgen)"
+
 echo -e '\n[info]: Setting random Webhook secrets'
 doppler secrets set --silent --config dev WEBHOOK_SECRET "$(openssl rand -base64 32)"
 doppler secrets set --silent --config stg WEBHOOK_SECRET "$(openssl rand -base64 32)"
