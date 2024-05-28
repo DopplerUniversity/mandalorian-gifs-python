@@ -36,10 +36,10 @@ Setting up for local development is mostly-automated through commands in the `Ma
 brew install python
 ```
 
-2. Clone the [Mandalorian GIFs repo](https://github.com/DopplerUniversityiversity/mandalorian-gifs-python):
+2. Clone the [Mandalorian GIFs repo](https://github.com/DopplerUniversity/mandalorian-gifs-python):
 
 ```sh
-git clone https://github.com/DopplerUniversityiversity/mandalorian-gifs-python
+git clone https://github.com/DopplerUniversity/mandalorian-gifs-python
 ```
 
 3. Create the virtual environment (which includes installing dev dependencies):
